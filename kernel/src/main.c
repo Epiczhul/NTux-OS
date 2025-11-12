@@ -6,6 +6,7 @@
 // kernel includes
 #include <drivers/framebuffer/fb.h>
 #include <drivers/framebuffer/kprint.h>
+#include <interrupts/gdt.h>
 
 static volatile struct limine_framebuffer* framebuffer;
 static int fb_width, fb_height;
@@ -37,8 +38,16 @@ void init_fb(void) {
     kprint_ok("frambuffer init");
 }
 
+void init_interrupts(void) {
+    gdt_init();
+    kprint_ok("GDT init");
+
+    kprint_ok("Interrupts init");
+}
+
 void init_kernel(void) {
     init_fb();
+    init_interrupts();
 }
 
 void kmain(void) {
