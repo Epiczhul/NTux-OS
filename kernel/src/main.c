@@ -7,6 +7,7 @@
 #include <drivers/framebuffer/fb.h>
 #include <drivers/framebuffer/kprint.h>
 #include <interrupts/gdt.h>
+#include <interrupts/idt.h>
 
 static volatile struct limine_framebuffer* framebuffer;
 static int fb_width, fb_height;
@@ -41,6 +42,8 @@ void init_fb(void) {
 void init_interrupts(void) {
     gdt_init();
     kprint_ok("GDT init");
+    idt_init();
+    kprint_ok("IDT init");
 
     kprint_ok("Interrupts init");
 }
