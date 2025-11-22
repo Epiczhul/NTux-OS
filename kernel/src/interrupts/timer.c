@@ -13,14 +13,10 @@ void timer_handler(void) {
         kprint("Timer ticked 100 times!\n");
     }
 
-    pic_send_eoi(0);
-    pic_send_eoi(0);  
 }
-
 void init_timer() {
-    asm volatile("call timer_pit_config");
+    timer_pit_config();
     irq_register_handler(0, timer_handler);
-    __asm__ volatile("sti");  
 }
 
 void sleep(uint32_t ticks) {

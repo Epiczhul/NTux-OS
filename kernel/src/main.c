@@ -51,11 +51,11 @@ void init_interrupts(void) {
     pic_init();
     kprint_ok("PIC init");
     gdt_init();
-
     kprint_ok("GDT init");
     idt_init();
     kprint_ok("IDT init");
-
+    init_timer();
+    kprint_ok("Timer init");
     interrupts_enable();
     kprint_ok("Enabled interrupts");
 
@@ -78,6 +78,7 @@ void init_interrupts(void) {
 void init_kernel(void) {
     init_fb();
     init_interrupts();
+    sleep(100);
     kprint_ok("Kernel initialized.");
 }
 

@@ -47,12 +47,10 @@ void idt_init(void) {
     // Register IRQ handlers (from IRQ 32 to IRQ 47)
     for (int i = 0; i < 16; i++) {
         idt_set_entry(32 + i, irq_stub_table[i]);
-        irq_register_handler(32 + i, irq_handler_c);
+       // irq_register_handler(32 + i, irq_handler_c);
     }
 
-    // Register the timer handler for IRQ 0 (PIT)
-    irq_register_handler(0, timer_handler());
-
+    
     // Inform user that handlers are registered
     kprint_ok("Registered IRQ handlers in IDT");
 
