@@ -12,6 +12,9 @@
 #include <interrupts/idt.h>
 #include <interrupts/pic.h>
 #include <interrupts/interrupts.h>
+#include <interrupts/irq.h> 
+#include <interrupts/timer.h> 
+
 
 static volatile struct limine_framebuffer* framebuffer;
 static int fb_width, fb_height;
@@ -48,6 +51,7 @@ void init_interrupts(void) {
     pic_init();
     kprint_ok("PIC init");
     gdt_init();
+
     kprint_ok("GDT init");
     idt_init();
     kprint_ok("IDT init");
@@ -69,7 +73,6 @@ void init_interrupts(void) {
         __asm__ volatile ("hlt");
     }
     
-
 }
 
 void init_kernel(void) {

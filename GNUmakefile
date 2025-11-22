@@ -99,7 +99,6 @@ run-hdd-riscv64: edk2-ovmf $(IMAGE_NAME).hdd
 run-loongarch64: edk2-ovmf $(IMAGE_NAME).iso
 	qemu-system-$(ARCH) \
 		-M virt \
-		-cpu la464 \
 		-device ramfb \
 		-device qemu-xhci \
 		-device usb-kbd \
