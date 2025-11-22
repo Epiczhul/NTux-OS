@@ -8,12 +8,7 @@
 static struct idt_entry idt[IDT_ENTRIES];
 static struct idt_ptr   idt_descriptor;
 
-// ---------------------------
-// NTux-OS: Dummy handler 
-// ---------------------------
-void idt_dummy_handler(void) {
-    for(;;) __asm__ volatile ("hlt");
-}
+
 
 // ---------------------------
 // NTux-OS: Set one IDT entry (64-bit)
@@ -40,10 +35,6 @@ void idt_init(void) {
         idt[i].offset_mid   = 0;
         idt[i].offset_high  = 0;
         idt[i].zero         = 0;
-    }
-
-    for (int i = 0; i < IDT_ENTRIES; i++) {
-        idt_set_entry(i, (uint64_t)idt_dummy_handler);
     }
 
     idt_descriptor.limit = sizeof(struct idt_entry) * IDT_ENTRIES - 1;
