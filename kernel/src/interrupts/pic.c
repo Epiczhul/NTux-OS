@@ -18,9 +18,11 @@ void pic_init(void) {
     pic_send_data(0x04, MASTER_PIC_DATA);  
     pic_send_data(0x02, SLAVE_PIC_DATA);   
     pic_send_data(0x01, MASTER_PIC_DATA);  
-    pic_send_data(0x01, SLAVE_PIC_DATA);   
-    pic_send_data(0xFF, MASTER_PIC_DATA);  
-    pic_send_data(0xFF, SLAVE_PIC_DATA);   
+    pic_send_data(0x01, SLAVE_PIC_DATA);    
+
+    // Unmask IRQ 0 (timer) on master PIC
+    pic_send_data(0xFE, MASTER_PIC_DATA);
+    pic_send_data(0xFF, SLAVE_PIC_DATA); 
 }
 
 void pic_send_eoi(uint8_t irq) {
